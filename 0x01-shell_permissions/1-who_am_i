@@ -1,2 +1,2 @@
 #!/bin/bash
-setuid betty
+id -n
