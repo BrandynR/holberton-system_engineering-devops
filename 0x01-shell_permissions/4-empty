@@ -1,2 +1,2 @@
 #!/bin/bash
-echo emacs hello
+echo touch hello
