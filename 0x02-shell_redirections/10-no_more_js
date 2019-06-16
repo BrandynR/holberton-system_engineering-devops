@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -f | rm *.js
+find -f | rm *.js
