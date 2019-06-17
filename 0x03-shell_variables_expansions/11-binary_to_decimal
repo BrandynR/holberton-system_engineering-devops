@@ -1,2 +1,2 @@
 #!/bin/base
-echo $((BASE#BINARY))n
+echo $((10#BINARY))
