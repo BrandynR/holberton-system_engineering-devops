@@ -1,2 +1,2 @@
 #!/bin/base
-echo $((BINARY#10))
+echo 'ibase=2; obase=10; BINARY | bc
