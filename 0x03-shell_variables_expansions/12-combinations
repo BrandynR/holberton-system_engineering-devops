@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -v "oo" [[:lower:]] [a-z] [a-z]
+echo {a..z}{a..z} | grep -v "oo" | xargs -n1
