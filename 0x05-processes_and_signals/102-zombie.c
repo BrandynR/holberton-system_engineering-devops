@@ -5,10 +5,10 @@
 #include <stdlib.h>
 
 /**
- * infite_while - mispelled infinite_white
- * Return: returns 0, never
+ * infinite_while - infinite loop
+ * Return: returns 0
  */
-int infite_while(void)
+int infinite_while(void)
 {
 	while (1)
 	{
