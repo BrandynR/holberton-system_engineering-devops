@@ -29,12 +29,15 @@ int zombie(void)
 	for (i = 0; i < 5; i++)
 	{
 		p = fork();
-		if (p == 0)
+		if (p > 0)
 		{
-			exit(0);
+			sleep(2);
 		}
+		else
+		{
 		printf("Zombie process created, PID: %u\n", p);
 		sleep(2);
+		}
 	}
 
 	return (0);
