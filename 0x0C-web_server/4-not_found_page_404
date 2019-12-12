@@ -3,15 +3,15 @@
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
-# enable pass of traffic in the port 80
+# enable traffic to pass in port 80
 sudo ufw allow 'Nginx HTTP'
 var="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;"
 cd /etc/nginx/sites-available/
 sudo sed -i "s/server_name _;/$var/" default
-cd -
+cd
 echo -e "Ceci n'est pas une page\n" | sudo tee /var/www/html/404_page.html
 var404="server_name _;\n\terror_page 404 \/404_page.html;\n\tlocation = \/404_page.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
 cd /etc/nginx/sites-available/
 sudo sed -i "s/server_name _;/$var404/" default
-cd -
+cd
 sudo service nginx restart
