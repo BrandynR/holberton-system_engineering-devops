@@ -36,32 +36,16 @@ defaults
 
 frontend www-http
 	 bind *:80
-	 bind *:443 ssl crt /etc/haproxy/ssl/www.reindel.tech.pem
+	 reqadd X-Forwarded-Proto:\ http
 	 mode http
 	 default_backend backendnodes
+
+frontend www-https
+	 bind *:443 ssl crt /etc/haproxy/ssl/all.pem
+        reqadd X-Forwarded-Proto:\ https
+        default_backend backendnodes
 
 backend backendnodes
 	balance roundrobin
 	server 840-web-01 35.237.225.4:80
 	server 840-web-02 34.74.173.192:80
-
-# The frontend only listens on port 80
-# If it detects a LetsEncrypt request, is uses the LE backend
-# Else it goes to the default backend for the web servers
-frontend fe-scalinglaravel
-    bind *:80
-
-    # Test URI to see if its a letsencrypt request
-        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-	    use_backend letsencrypt-backend if letsencrypt-acl
-
-    default_backend be-scalinglaravel
-
-# LE Backend
-backend letsencrypt-backend
-    server letsencrypt 127.0.0.1:8888
-
-# Normal (default) Backend
-# for web app servers
-backend be-scalinglaravel
-    # Config omitted here
