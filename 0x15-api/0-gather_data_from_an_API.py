@@ -9,8 +9,6 @@ import requests
 from sys import argv
 
 
-if __name__ == "__main__":
-
 def main():
     """ returns info about TODO list """
     total = 0
@@ -29,3 +27,6 @@ def main():
     for task in task_req:
         if task['completed'] is True:
             print("\t {}".format(task['title']))
+
+if __name__ == "__main__":
+    main()
