@@ -11,21 +11,21 @@ from sys import argv
 
 if __name__ == "__main__":
 
-    r = requests.get('https://jsonplaceholder.typicode.com/users/{}'
-                     .format(argv[1]))
+def main():
+    """ returns info about TODO list """
+    total = 0
+    complete = 0
+    user = "https://jsonplaceholder.typicode.com/users/"
+    t_url = "https://jsonplaceholder.typicode.com/todos?userId="
+    user_req = requests.get('{}{}'.format(user, argv[1])).json()
+    task_req = requests.get('{}{}'.format(t_url, argv[1])).json()
 
-    EMPLOYEE_NAME = r.json().get('name')
-
-    r = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
-                     .format(argv[1]))
-
-for task in requests.get(r).json():
-        if user["id"] == task["userId"]:
-            total_tasks += 1
-            if task["completed"] is True:
-                task_list.append(task["title"])
-                completed_tasks += 1
-    print("Employee {} is done with tasks({}/{}):".format(
-        user["name"], completed_tasks, total_tasks))
-    for title in task_list:
-        print("\t {}".format(title))
+    for task in task_req:
+        if task['completed'] is True:
+            complete += 1
+        total += 1
+    print("Employee {} is done with tasks({}/{}):".format(user['name'],
+          complete, total))
+    for task in task_req:
+        if task['completed'] is True:
+            print("\t {}".format(task['title']))
