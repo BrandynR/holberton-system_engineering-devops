@@ -9,24 +9,18 @@ import requests
 from sys import argv
 
 
-def main():
-    """ returns info about TODO list """
-    total = 0
-    complete = 0
-    user = "https://jsonplaceholder.typicode.com/users/"
-    t_url = "https://jsonplaceholder.typicode.com/todos?userId="
-    user_req = requests.get('{}{}'.format(user, argv[1])).json()
-    task_req = requests.get('{}{}'.format(t_url, argv[1])).json()
-
-    for task in task_req:
-        if task['completed'] is True:
-            complete += 1
-        total += 1
-    print("Employee {} is done with tasks({}/{}):".format(user['name'],
-          complete, total))
-    for task in task_req:
-        if task['completed'] is True:
-            print("\t {}".format(task['title']))
-
 if __name__ == "__main__":
-    main()
+    url = "https://jsonplaceholder.typicode.com"
+    user = requests.get(url + "/users", params={"id": sys.argv[1]})
+    for names in user.json():
+        user_id = names.get('id')
+        todo = requests.get(url + "/todos", params={"userId": user_id})
+        task_complete = 0
+        tasks_array = []
+        for tasks in todo.json():
+            if tasks.get('completed') is True:
+                task_complete += 1
+                tasks_array.append(tasks.get('title'))
+        print("Employee {:s} is done with tasks({:d}/{:d}):\n\t {}".
+              format(names.get('name'), task_complete,
+                     len(todo.json()), "\n\t ".join(tasks_array)))
