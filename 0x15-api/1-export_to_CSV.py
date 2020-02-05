@@ -6,7 +6,7 @@ File name must be: USER_ID.csv
 """
 import csv
 import requests
-import sys
+from sys import argv
 
 
 def main():
