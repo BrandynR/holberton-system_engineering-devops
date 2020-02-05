@@ -9,16 +9,24 @@ import requests
 import sys
 
 
+def main():
+    """ returns TODO list """
+    total = 0
+    complete = 0
+    user_url = "https://jsonplaceholder.typicode.com/users/"
+    task_url = "https://jsonplaceholder.typicode.com/todos?userId="
+    user = requests.get('{}{}'.format(user_url, argv[1])).json()
+    tasks = requests.get('{}{}'.format(task_url, argv[1])).json()
+
+    for task in tasks:
+        task['username'] = user['username']
+        del task['id']
+
+    with open("{}.csv".format(argv[1]), 'w') as f:
+        fieldnames = ["userId", "username", "completed", "title"]
+        dict_writer = csv.DictWriter(f, fieldnames=fieldnames,
+                                     quoting=csv.QUOTE_ALL)
+        dict_writer.writerows(tasks)
+
 if __name__ == "__main__":
-    root = "https://jsonplaceholder.typicode.com"
-    users = requests.get(root + "/users", params={"id": sys.argv[1]})
-    for names in users.json():
-        usr_id = names.get('id')
-        todo = requests.get(root + "/todos", params={"userId": usr_id})
-        csv_arr = []
-        with open(sys.argv[1] + ".csv", 'a') as f:
-            writer = csv.writer(f, quoting=csv.QUOTE_ALL)
-            for tasks in todo.json():
-                writer.writerow([names.get('id'), names.get('name'),
-                                 str(tasks.get('completed')),
-                                 tasks.get('title')])
+    main()
