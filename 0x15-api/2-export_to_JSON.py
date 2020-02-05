@@ -6,21 +6,23 @@ TASK_COMPLETED_STATUS,"username":"USERNAME"}},{"task":"TASK_TITLE","completed":
 TASK_COMPLETED_STATUS, "username": "USERNAME"}}, ... ]}
 File name must be: USER_ID.json
 """
-import json
+from json import dump
 import requests
-import sys
+from sys import argv
 
 
 if __name__ == "__main__":
-    root = "https://jsonplaceholder.typicode.com"
-    users = requests.get(root + "/users", params={"id": sys.argv[1]})
-    for names in users.json():
-        usr_id = names.get('id')
-        todo = requests.get(root + "/todos", params={"userId": usr_id})
-        csv_arr = []
-        for tasks in todo.json():
-            csv_arr.append({"task": tasks.get("title"),
-                            "completed": str(tasks.get("completed")),
-                            "username": names.get("name")})
-        with open(sys.argv[1] + ".json", 'a') as f:
-            f.write(json.dumps({"2": csv_arr}))
+    new_list = []
+    user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                        .format(argv[1])).json()
+    url = "https://jsonplaceholder.typicode.com/todos"
+    for task in requests.get(url).json():
+        if user["id"] == task["userId"]:
+            task_dict = {}
+            task_dict["task"] = task["title"]
+            task_dict["completed"] = task["completed"]
+            task_dict["username"] = user["username"]
+            new_list.append(task_dict)
+    result = {str(argv[1]): new_list}
+    with open(argv[1] + ".json", 'w') as file:
+        dump(result, file)
