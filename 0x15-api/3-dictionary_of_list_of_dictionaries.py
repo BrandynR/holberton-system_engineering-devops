@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """Records all tasks from all employees
 Format must be: { "USER_ID": [ {"username": "USERNAME", "task": "TASK_TITLE",
-"completed": TASK_COMPLETED_STATUS}, {"username":"USERNAME", "task":"TASK_TITLE"
-"completed": TASK_COMPLETED_STATUS}, ... ], "USER_ID": [ {"username":"USERNAME"
-"task": "TASK_TITLE","completed": TASK_COMPLETED_STATUS}, {"username":"USERNAME"
-"task": "TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, ... ]}
+"completed":TASK_COMPLETED_STATUS}, {"username":"USERNAME", "task":"TASK_TITLE"
+"completed":TASK_COMPLETED_STATUS}, ... ], "USER_ID": [ {"username":"USERNAME"
+"task":"TASK_TITLE","completed": TASK_COMPLETED_STATUS}, {"username":"USERNAME"
+"task":"TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, ... ]}
 """
 
 
