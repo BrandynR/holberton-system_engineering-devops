@@ -1,20 +1,22 @@
 #!/usr/bin/python3
 """
-function that queries the Reddit API and returns the number of
-subscribers (not active users, total subscribers) for a given subreddit.
-If an invalid subreddit is given, the function should return 0.
+Function that queries the Reddit API and prints the titles
+of the first 10 hot posts listed for a given subreddit
 """
 import requests
 
 
-def number_of_subscribers(subreddit):
-    """
-    Uses reddit api to get numbers of subscribers of a subreddit
-    """
-    url = 'https://reddit.com/r/' + subreddit + '/about/.json'
-    headers = {'User-Agent': "Brandyn"}
-    r = requests.get(url, headers=headers)
+def top_ten(subreddit):
+    """Prints first 10 titles of hot posts"""
+    hot_posts = requests.get(
+        'https://api.reddit.com/r/{}/hot'.format(subreddit),
+        headers={'User-Agent': 'Brandyn'}
+    ).json()
     try:
-        return(r.json().get('data').get('subscribers'))
+        i = 0
+        while (i < 10):
+            post = hot_posts['data']['children'][i]
+            print(post['data']['title'])
+            i += 1
     except:
-        return(0)
+        print(None)
