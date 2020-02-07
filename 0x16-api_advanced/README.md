@@ -1,19 +1,20 @@
-0x12. Javascript - Warm up
+0x16. API advanced
 
 Background Context
-Javascript is used for many things. At Holberton School, you will use Javascript for 2 reasons:
+Questions involving APIs are common for interviews. Sometimes they’re as simple as ‘write a Python script that queries a given endpoint’, sometimes they require you to use recursive functions and format/sort the results.
 
-Scripting (same as we did with Python)
-Web front-end
-For the moment, and for learning all basic concepts of this language, we will do some scripting. After, we will make our AirBnB project dynamic by using Javascript and JQuery.
+A great API to use for some practice is the Reddit API. There’s a lot of endpoints available, many that don’t require any form of authentication, and there’s tons of information to be parsed out and presented. Getting comfortable with API calls now can save you some face during technical interviews and even outside of the job market, you might find personal use cases to make your life a little bit easier.
 
 Requirements
 General
 Allowed editors: vi, vim, emacs
-All your files will be interpreted on Ubuntu 14.04 LTS using node (version 10.14.x)
+All your files will be interpreted/compiled on Ubuntu 14.04 LTS using python3 (version 3.4.3)
 All your files should end with a new line
-The first line of all your files should be exactly #!/usr/bin/node
+The first line of all your files should be exactly #!/usr/bin/python3
+Libraries imported in your Python files must be organized in alphabetical order
 A README.md file, at the root of the folder of the project, is mandatory
-Your code should be semistandard compliant (version 14.x.x). Rules of Standard + semicolons on top. Also as reference: AirBnB style
+Your code should use the PEP 8 style
 All your files must be executable
 The length of your files will be tested using wc
+All your modules should have a documentation (python3 -c 'print(__import__("my_module").__doc__)')
+You must use the Requests module for sending HTTP requests to the Reddit API
